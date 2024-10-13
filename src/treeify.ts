@@ -1,31 +1,34 @@
-import { type EmptyNode, emptyNode } from "./empty";
-import { type TreeNode, type TreeNodeValue } from "./node";
+import { nodedify, type TreeNode, type TreeNodeItem } from "./node";
 
-export function treeify<Id, Value extends TreeNodeValue<Id>>(items: Map<Id, Value>): TreeNode<Id, Value>[] {
-  const lookup = new Map<Id, EmptyNode<Id, Value> | TreeNode<Id, Value>>();
-  const tree: TreeNode<Id, Value>[] = [];
+export function treeify<Id, Item extends TreeNodeItem<Id>>(items: Map<Id, Item>): TreeNode<Id, Item>[] {
+  const lookup = new Map<Id, TreeNode<Id, Item>>();
+  const tree: TreeNode<Id, Item>[] = [];
 
   items.forEach((item, id) => {
-    // make sure that treeable item is present at the lookup table. it could have been created before by a children node, so we make sure not to loose any saved data.
-    if (!lookup.has(id)) lookup.set(id, emptyNode());    
-    const node = lookup.get(id);
-    if (!node) throw new Error("node need to be set for proper tree construction");
-
-    node.value = item;
-
-    if (item.parentId !== undefined) {
-      const { parentId } = item;
-
-      if (!lookup.has(parentId)) lookup.set(parentId, emptyNode());    
-      const parentNode = lookup.get(id);
-      if (!parentNode) throw new Error("parent node need to be set for proper tree construction");
-  
-      parentNode.children.push(node);
+    const node = assertNode(id, item);
+    
+    const { parentId } = item;
+    if (parentId === undefined) {
+      tree.push(node);
     }
     else {
-      tree.push(node);
+      const parentItem = items.get(parentId);
+      if (!parentItem) throw new Error("parent item not found in items input");
+      const parentNode = assertNode(parentId, parentItem);  
+      parentNode.children.push(node);
     }
   });
 
   return tree;
+
+  function assertNode(id: Id, value: Item) {
+    const maybeNode = lookup.get(id);
+    if (maybeNode) {
+      return maybeNode;
+    } else {
+      const node = nodedify<Id, Item>(value);
+      lookup.set(id, node);
+      return node;
+    }
+  }
 }

@@ -1,13 +1,13 @@
-export interface TreeNodeValue<Id> {
+export interface TreeNodeItem<Id> {
   parentId?: Id;
 }
 
-export interface TreeNode<Id, Value extends TreeNodeValue<Id>> {
-  children: TreeNode<Id, Value>[];
-  value: Value;
+export interface TreeNode<Id, Item extends TreeNodeItem<Id>> {
+  children: TreeNode<Id, Item>[];
+  value: Item;
 }
 
-export function nodedify<Id, Value extends TreeNodeValue<Id>>(item: Value): TreeNode<Id, Value> {
+export function nodedify<Id, Item extends TreeNodeItem<Id>>(item: Item): TreeNode<Id, Item> {
   return {
     children: [],
     value: item
