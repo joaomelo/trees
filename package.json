@@ -1,23 +1,23 @@
 {
   "name": "@joaomelo/trees",
-  "description": "utilities for trees data stuctures",
   "version": "0.0.1",
+  "license": "MIT",
+  "description": "utilities for trees data stuctures",
+  "keywords": [
+    "trees",
+    "utils",
+    "javascript",
+    "typescript"
+  ],
+  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "type": "module",
   "exports": {
     ".": {
       "require": null,
       "import": "./dist/index.js"
     }
-  },
-  "scripts": {
-    "lint": "eslint",
-    "test": "vitest run",
-    "build": "vite build",
-    "readme": "readme",
-    "deploy": "npm run lint && npm run test && release-it --ci --verbose"
   },
   "publishConfig": {
     "access": "public"
@@ -27,15 +27,26 @@
     "url": "git+https://github.com/joaomelo/trees.git"
   },
   "author": "joão melo <j@melo.plus> (https://joao.melo.plus)",
+  "scripts": {
+    "dev": "vitest",
+    "lint": "eslint",
+    "test": "vitest run",
+    "build": "vite build",
+    "readme": "readme",
+    "deploy": "npm run lint && npm run test && release-it --ci --verbose"
+  },
+  "dependencies": {
+    "@joaomelo/arrays": "^0.0.3",
+    "@joaomelo/objects": "^0.1.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@joaomelo/lint": "^0.2.1",
     "@joaomelo/readme": "^0.1.1",
     "@release-it/conventional-changelog": "^8.0.1",
     "@stylistic/eslint-plugin": "^2.8.0",
     "@types/eslint__js": "^8.42.3",
-    "@types/lodash.clonedeep": "^4.5.9",
     "@types/node": "^22.5.0",
-    "@types/uuid": "^10.0.0",
     "eslint": "^9.9.1",
     "eslint-plugin-no-only-tests": "^3.3.0",
     "eslint-plugin-perfectionist": "^3.3.0",
@@ -47,16 +58,5 @@
     "vite-plugin-checker": "^0.8.0",
     "vite-plugin-dts": "^4.2.3",
     "vitest": "^0.31.4"
-  },
-  "keywords": [
-    "trees",
-    "utils",
-    "javascript",
-    "typescript"
-  ],
-  "license": "MIT",
-  "dependencies": {
-    "@joaomelo/arrays": "^0.0.3",
-    "@joaomelo/objects": "^0.1.0"
   }
 }
