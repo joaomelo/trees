@@ -1,8 +1,8 @@
-import { nodedify, type TreeNode, type TreeNodeItem } from "./node";
+import { nodedify, type Tree, type TreeNode, type TreeNodeItem } from "./tree";
 
-export function treeify<Id, Item extends TreeNodeItem<Id>>(items: Map<Id, Item>): TreeNode<Id, Item>[] {
+export function treeify<Id, Item extends TreeNodeItem<Id>>(items: Map<Id, Item>): Tree<Id, Item> {
   const lookup = new Map<Id, TreeNode<Id, Item>>();
-  const tree: TreeNode<Id, Item>[] = [];
+  const tree: Tree<Id, Item> = [];
 
   items.forEach((item, id) => {
     const node = assertNode(id, item);

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { type TreeNodeItem } from "./node";
+import { type TreeNodeItem } from "./tree";
 import { treeify } from "./treeify";
 
 interface MockItem extends TreeNodeItem<number> {
@@ -18,9 +18,9 @@ describe("treeify", () => {
     const tree = treeify(items);
 
     expect(tree.length).toBe(2);
-    expect(tree[0].value.id).toBe(1);
+    expect(tree[0].item.id).toBe(1);
     expect(tree[0].children).toHaveLength(0);
-    expect(tree[1].value.id).toBe(2);
+    expect(tree[1].item.id).toBe(2);
     expect(tree[1].children).toHaveLength(0);
   });
 
@@ -36,14 +36,14 @@ describe("treeify", () => {
     const tree = treeify(items);
 
     expect(tree.length).toBe(2); 
-    expect(tree[0].value.id).toBe(1);
+    expect(tree[0].item.id).toBe(1);
     expect(tree[0].children.length).toBe(2); 
-    expect(tree[0].children[0].value.id).toBe(2);
-    expect(tree[0].children[1].value.id).toBe(3);
+    expect(tree[0].children[0].item.id).toBe(2);
+    expect(tree[0].children[1].item.id).toBe(3);
 
-    expect(tree[1].value.id).toBe(4);
+    expect(tree[1].item.id).toBe(4);
     expect(tree[1].children.length).toBe(1); 
-    expect(tree[1].children[0].value.id).toBe(5);
+    expect(tree[1].children[0].item.id).toBe(5);
   });
 
   it("should throw an error if a parent is not found in the items map", () => {
