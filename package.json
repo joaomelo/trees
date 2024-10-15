@@ -2,7 +2,7 @@
   "name": "@joaomelo/trees",
   "version": "0.1.0",
   "license": "MIT",
-  "description": "utilities for trees data stuctures",
+  "description": "utilities for tree data structures",
   "keywords": [
     "trees",
     "utils",
