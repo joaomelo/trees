@@ -1,6 +1,6 @@
 @joaomelo/trees
 
-utilities for trees data stuctures
+utilities for tree data structures
   
 ```bash
 npm install @joaomelo/trees
